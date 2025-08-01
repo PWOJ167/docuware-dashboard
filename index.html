@@ -7,9 +7,9 @@
   <style>
     body {
       margin: 0;
-      background: #1e1e2f;
+      background: #f7f9fc;
       font-family: 'Segoe UI', sans-serif;
-      color: #ffffff;
+      color: #333;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -18,98 +18,82 @@
     }
 
     h1 {
-      font-size: 3.5em;
-      color: #ffffff;
-      margin-bottom: 20px;
+      font-size: 3em;
+      margin-bottom: 10px;
+      color: #007acc;
+    }
+
+    #myChart {
+      max-width: 800px;
+      max-height: 400px;
     }
 
     .chart-container {
       width: 90%;
-      max-width: 1000px;
-    }
-
-    canvas {
-      background: #2c2f4a;
-      border-radius: 12px;
-      padding: 20px;
+      max-width: 900px;
     }
 
     .footer {
-      margin-top: 20px;
+      position: absolute;
+      bottom: 10px;
       font-size: 0.9em;
-      color: #cccccc;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <h1>Offene Rechnungen</h1>
+  <h1>Aktuelle Rechnungen</h1>
   <div class="chart-container">
     <canvas id="myChart"></canvas>
   </div>
   <div class="footer">Stand: <span id="date"></span></div>
 
   <script>
-    const data = {
-      labels: ['Offene Rechnungen', 'Alte Rechnungen'],
-      datasets: [{
-        label: 'Anzahl',
-        data: [159, 59], // <-- Trage hier deine Zahlen dynamisch oder manuell ein
-        backgroundColor: ['#ff5252', '#ffa726'],
-        borderRadius: 10
-      }]
-    };
+    const ctx = document.getElementById('myChart').getContext('2d');
 
-    const options = {
-      plugins: {
-        legend: {
-          display: false
-        },
-        tooltip: {
-          enabled: true
-        },
-        datalabels: {
-          anchor: 'end',
-          align: 'top',
-          color: '#ffffff',
-          font: {
-            weight: 'bold',
-            size: 20
-          }
-        }
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Alte Rechnungen', 'Offene Rechnungen'],
+        datasets: [{
+          label: 'Anzahl',
+          data: [59, 159], // <--- Trage hier deine echten Werte ein oder automatisiere das mit Make
+          backgroundColor: ['#ffa726', '#42a5f5'],
+          borderRadius: 10
+        }]
       },
-      scales: {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            color: '#ffffff',
-            stepSize: 20
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true
           }
         },
-        x: {
-          ticks: {
-            color: '#ffffff',
-            font: {
-              weight: 'bold'
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 20
+            },
+            title: {
+              display: true,
+              text: 'Anzahl der Rechnungen'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Rechnungstyp'
             }
           }
         }
       }
-    };
-
-    // Chart erstellen
-    const ctx = document.getElementById('myChart').getContext('2d');
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: data,
-      options: options,
-      plugins: [ChartDataLabels]
     });
 
-    // Datum anzeigen
+    // Datum unten anzeigen
     document.getElementById('date').textContent = new Date().toLocaleString('de-DE');
   </script>
-
-  <!-- Chart.js DataLabels Plugin einbinden -->
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 </body>
 </html>
