@@ -1,1 +1,115 @@
-<h1>Herzlich Willkommen</h1>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Rechnungsübersicht</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #1e1e2f;
+      font-family: 'Segoe UI', sans-serif;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 3.5em;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .chart-container {
+      width: 90%;
+      max-width: 1000px;
+    }
+
+    canvas {
+      background: #2c2f4a;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #cccccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>Offene Rechnungen</h1>
+  <div class="chart-container">
+    <canvas id="myChart"></canvas>
+  </div>
+  <div class="footer">Stand: <span id="date"></span></div>
+
+  <script>
+    const data = {
+      labels: ['Offene Rechnungen', 'Alte Rechnungen'],
+      datasets: [{
+        label: 'Anzahl',
+        data: [159, 59], // <-- Trage hier deine Zahlen dynamisch oder manuell ein
+        backgroundColor: ['#ff5252', '#ffa726'],
+        borderRadius: 10
+      }]
+    };
+
+    const options = {
+      plugins: {
+        legend: {
+          display: false
+        },
+        tooltip: {
+          enabled: true
+        },
+        datalabels: {
+          anchor: 'end',
+          align: 'top',
+          color: '#ffffff',
+          font: {
+            weight: 'bold',
+            size: 20
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            color: '#ffffff',
+            stepSize: 20
+          }
+        },
+        x: {
+          ticks: {
+            color: '#ffffff',
+            font: {
+              weight: 'bold'
+            }
+          }
+        }
+      }
+    };
+
+    // Chart erstellen
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: data,
+      options: options,
+      plugins: [ChartDataLabels]
+    });
+
+    // Datum anzeigen
+    document.getElementById('date').textContent = new Date().toLocaleString('de-DE');
+  </script>
+
+  <!-- Chart.js DataLabels Plugin einbinden -->
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+</body>
+</html>
