@@ -2,100 +2,66 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Rechnungsübersicht</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>DocuWare Dashboard</title>
   <style>
     body {
-      margin: 0;
-      background: #f7f9fc;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
       color: #333;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
+      margin: 0;
     }
-
-    h1 {
-      font-size: 3em;
+    .counter-box {
+      background: white;
+      padding: 30px 50px;
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .counter-title {
+      font-size: 1.5rem;
       margin-bottom: 10px;
+    }
+    .counter-number {
+      font-size: 4rem;
       color: #007acc;
-    }
-
-    #myChart {
-      max-width: 800px;
-      max-height: 400px;
-    }
-
-    .chart-container {
-      width: 90%;
-      max-width: 900px;
-    }
-
-    .footer {
-      position: absolute;
-      bottom: 10px;
-      font-size: 0.9em;
-      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <h1>Aktuelle Rechnungen</h1>
-  <div class="chart-container">
-    <canvas id="myChart"></canvas>
+
+  <div class="counter-box">
+    <div class="counter-title">Offene Rechnungen</div>
+    <div class="counter-number" id="openInvoices">0</div>
   </div>
-  <div class="footer">Stand: <span id="date"></span></div>
 
+  <div class="counter-box">
+    <div class="counter-title">Offene alte Rechnungen</div>
+    <div class="counter-number" id="oldInvoices">0</div>
+  </div>
+
+  <!-- CountUp.js via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.8/dist/countUp.min.js"></script>
   <script>
-    const ctx = document.getElementById('myChart').getContext('2d');
+    // Beispielwerte, die du per JSON oder Platzhalter einfügen kannst
+    const openInvoices = 27;
+    const oldInvoices = 5;
 
-    const myChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['Alte Rechnungen', 'Offene Rechnungen'],
-        datasets: [{
-          label: 'Anzahl',
-          data: 30, // <--- Trage hier deine echten Werte ein oder automatisiere das mit Make
-          backgroundColor: ['#ffa726', '#42a5f5'],
-          borderRadius: 10
-        }]
-      },
-      options: {
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            enabled: true
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 20
-            },
-            title: {
-              display: true,
-              text: 'Anzahl der Rechnungen'
-            }
-          },
-          x: {
-            title: {
-              display: true,
-              text: 'Rechnungstyp'
-            }
-          }
-        }
-      }
-    });
+    // Animation starten
+    const counter1 = new CountUp('openInvoices', openInvoices);
+    const counter2 = new CountUp('oldInvoices', oldInvoices);
 
-    // Datum unten anzeigen
-    document.getElementById('date').textContent = new Date().toLocaleString('de-DE');
+    if (!counter1.error) counter1.start();
+    else console.error(counter1.error);
+
+    if (!counter2.error) counter2.start();
+    else console.error(counter2.error);
   </script>
+
 </body>
 </html>
-
-​
