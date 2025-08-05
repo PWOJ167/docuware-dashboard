@@ -47,10 +47,14 @@
     .camel {
       position: absolute;
       bottom: 30px;
-      width: 100px;
-      height: 60px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/4/47/Camel_cartoon_01.svg') no-repeat center/contain;
+      width: 120px;
+      height: auto;
       animation: walk 30s linear infinite;
+    }
+
+    .camel img {
+      width: 100%;
+      height: auto;
     }
 
     .camel:nth-child(2) {
@@ -59,7 +63,7 @@
 
     @keyframes walk {
       0% {
-        left: -120px;
+        left: -150px;
       }
       100% {
         left: 100%;
@@ -72,7 +76,7 @@
   <div class="dashboard">
     <div class="section">
       <h1>Offene Rechnungen</h1>
-      <div class="value">62</div>
+      <div class="value">196</div>
     </div>
     <div class="section">
       <h1>Offene alte Rechnungen</h1>
@@ -81,8 +85,12 @@
   </div>
 
   <div class="desert">
-    <div class="camel"></div>
-    <div class="camel"></div>
+    <div class="camel">
+      <img src="https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif" alt="Kamel">
+    </div>
+    <div class="camel">
+      <img src="https://media.giphy.com/media/ZVik7pBtu9dNS/giphy.gif" alt="Kamel">
+    </div>
   </div>
 
 </body>
