@@ -9,41 +9,42 @@
       font-family: Arial, sans-serif;
       background-color: #f4f6f9;
       margin: 0;
-      padding: 20px;
+      padding: 40px;
       text-align: center;
     }
 
     h1 {
       color: #333;
-      font-size: 28px;
+      font-size: 42px;
+      margin-bottom: 40px;
     }
 
     .card {
       background-color: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       display: inline-block;
-      padding: 30px;
-      margin: 20px;
-      width: 300px;
+      padding: 50px;
+      margin: 30px;
+      width: 420px;
     }
 
     .number {
-      font-size: 60px;
+      font-size: 120px;
       font-weight: bold;
       color: #007bff;
     }
 
     .label {
-      font-size: 18px;
-      color: #666;
-      margin-top: 10px;
+      font-size: 26px;
+      color: #444;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
 
-  <h1>DocuWare Dashboard</h1>
+  <h1>DocuWare Rechnungsübersicht</h1>
 
   <div class="card">
     <div id="openInvoices" class="number">0</div>
@@ -59,17 +60,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.6.2/countUp.umd.js"></script>
 
   <script>
-    // Beispielhafte Daten – werden von Make ersetzt
-    const openInvoices = {"formula":159,"formulaLocal":159,"numberFormat":"General","text":"159","value":159,"valueType":"Double"};
+    // Beispielwerte – Make ersetzt das später dynamisch
+    const openInvoices ={"formula":159,"formulaLocal":159,"numberFormat":"General","text":"159","value":159,"valueType":"Double"} ;
 
     const oldInvoices = {"formula":59,"formulaLocal":59,"numberFormat":"General","text":"59","value":59,"valueType":"Double"};
 
-    // Werte extrahieren mit Fallback (falls "value" fehlt)
+    // Zahlen extrahieren
     const openValue = openInvoices?.value ?? 0;
     const oldValue = oldInvoices?.value ?? 0;
 
-    const counter1 = new countUp.CountUp('openInvoices', openValue);
-    const counter2 = new countUp.CountUp('oldInvoices', oldValue);
+    // Animation starten
+    const counter1 = new countUp.CountUp('openInvoices', openValue, { duration: 2 });
+    const counter2 = new countUp.CountUp('oldInvoices', oldValue, { duration: 2 });
 
     if (!counter1.error) counter1.start();
     else console.error(counter1.error);
