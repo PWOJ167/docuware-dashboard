@@ -1,78 +1,89 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rechnungsübersicht</title>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      overflow: hidden;
     }
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 40px;
+    .dashboard {
+      position: absolute;
+      top: 20px;
+      width: 100%;
+      text-align: center;
       color: #333;
     }
 
-    .stat {
-      font-size: 120px;
+    .dashboard h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .dashboard .value {
+      font-size: 5rem;
       font-weight: bold;
-      margin: 20px;
-      color: #007acc;
-      transition: transform 0.3s ease;
+      color: #d35400;
     }
 
-    .label {
-      font-size: 24px;
-      color: #555;
+    .section {
+      display: inline-block;
+      margin: 40px;
     }
 
-    .box {
-      text-align: center;
-      padding: 20px 40px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      margin: 20px;
-      animation: fadeIn 1s ease forwards;
+    .desert {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(to top, #edc9af, #f4e2d8);
+      overflow: hidden;
     }
 
-    @keyframes fadeIn {
-      0% { opacity: 0; transform: scale(0.95); }
-      100% { opacity: 1; transform: scale(1); }
+    .camel {
+      position: absolute;
+      bottom: 30px;
+      width: 100px;
+      height: 60px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/4/47/Camel_cartoon_01.svg') no-repeat center/contain;
+      animation: walk 30s linear infinite;
+    }
+
+    .camel:nth-child(2) {
+      animation-delay: 15s;
+    }
+
+    @keyframes walk {
+      0% {
+        left: -120px;
+      }
+      100% {
+        left: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Offene Rechnungen</h1>
 
-  <div class="box">
-    <div class="stat" id="openInvoices">0</div>
-    <div class="label">Offene Rechnungen</div>
+  <div class="dashboard">
+    <div class="section">
+      <h1>Offene Rechnungen</h1>
+      <div class="value">62</div>
+    </div>
+    <div class="section">
+      <h1>Offene alte Rechnungen</h1>
+      <div class="value">64</div>
+    </div>
   </div>
 
-  <div class="box">
-    <div class="stat" id="oldInvoices">0</div>
-    <div class="label">Davon älter als 14 Tage</div>
+  <div class="desert">
+    <div class="camel"></div>
+    <div class="camel"></div>
   </div>
 
-  <script>
-    // Zahlen, die Make direkt einträgt:
-    const openInvoices =195 ; // Beispielwert
-    const oldInvoices =64 ;   // Beispielwert
-
-    // Dynamisch anzeigen
-    document.getElementById('openInvoices').textContent = openInvoices;
-    document.getElementById('oldInvoices').textContent = oldInvoices;
-  </script>
 </body>
 </html>
-
