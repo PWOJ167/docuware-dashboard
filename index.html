@@ -1,84 +1,100 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <title>Rechnungsübersicht</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f6f9;
       margin: 0;
-      padding: 40px;
-      text-align: center;
+      background: #f7f9fc;
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
 
     h1 {
-      color: #333;
-      font-size: 42px;
-      margin-bottom: 40px;
+      font-size: 3em;
+      margin-bottom: 10px;
+      color: #007acc;
     }
 
-    .card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      display: inline-block;
-      padding: 50px;
-      margin: 30px;
-      width: 420px;
+    #myChart {
+      max-width: 800px;
+      max-height: 400px;
     }
 
-    .number {
-      font-size: 120px;
-      font-weight: bold;
-      color: #007bff;
+    .chart-container {
+      width: 90%;
+      max-width: 900px;
     }
 
-    .label {
-      font-size: 26px;
-      color: #444;
-      margin-top: 20px;
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.9em;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-
-  <h1>DocuWare Rechnungsübersicht</h1>
-
-  <div class="card">
-    <div id="openInvoices" class="number">0</div>
-    <div class="label">Offene Rechnungen</div>
+  <h1>Aktuelle Rechnungen</h1>
+  <div class="chart-container">
+    <canvas id="myChart"></canvas>
   </div>
-
-  <div class="card">
-    <div id="oldInvoices" class="number">0</div>
-    <div class="label">Alte offene Rechnungen</div>
-  </div>
-
-  <!-- CountUp.js von CDN laden -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.6.2/countUp.umd.js"></script>
+  <div class="footer">Stand: <span id="date"></span></div>
 
   <script>
-    // Beispielwerte – Make ersetzt das später dynamisch
-    const openInvoices ={"formula":159,"formulaLocal":159,"numberFormat":"General","text":"159","value":159,"valueType":"Double"} ;
+    const ctx = document.getElementById('myChart').getContext('2d');
 
-    const oldInvoices = {"formula":59,"formulaLocal":59,"numberFormat":"General","text":"59","value":59,"valueType":"Double"};
+    const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Alte Rechnungen', 'Offene Rechnungen'],
+        datasets: [{
+          label: 'Anzahl',
+          data: {"formula":59,"formulaLocal":59,"numberFormat":"General","text":"59","value":59,"valueType":"Double"},{"formula":159,"formulaLocal":159,"numberFormat":"General","text":"159","value":159,"valueType":"Double"} // <--- Trage hier deine echten Werte ein oder automatisiere das mit Make
+          backgroundColor: ['#ffa726', '#42a5f5'],
+          borderRadius: 10
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: true
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              stepSize: 20
+            },
+            title: {
+              display: true,
+              text: 'Anzahl der Rechnungen'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Rechnungstyp'
+            }
+          }
+        }
+      }
+    });
 
-    // Zahlen extrahieren
-    const openValue = openInvoices?.value ?? 0;
-    const oldValue = oldInvoices?.value ?? 0;
-
-    // Animation starten
-    const counter1 = new countUp.CountUp('openInvoices', openValue, { duration: 2 });
-    const counter2 = new countUp.CountUp('oldInvoices', oldValue, { duration: 2 });
-
-    if (!counter1.error) counter1.start();
-    else console.error(counter1.error);
-
-    if (!counter2.error) counter2.start();
-    else console.error(counter2.error);
+    // Datum unten anzeigen
+    document.getElementById('date').textContent = new Date().toLocaleString('de-DE');
   </script>
-
 </body>
 </html>
+
