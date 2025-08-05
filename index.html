@@ -1,60 +1,75 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>DocuWare Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      background-color: #f4f6f9;
       margin: 0;
-    }
-    .counter-box {
-      background: white;
-      padding: 30px 50px;
-      margin: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px;
       text-align: center;
     }
-    .counter-title {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+
+    h1 {
+      color: #333;
+      font-size: 28px;
     }
-    .counter-number {
-      font-size: 4rem;
-      color: #007acc;
+
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      display: inline-block;
+      padding: 30px;
+      margin: 20px;
+      width: 300px;
+    }
+
+    .number {
+      font-size: 60px;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .label {
+      font-size: 18px;
+      color: #666;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
-  <div class="counter-box">
-    <div class="counter-title">Offene Rechnungen</div>
-    <div class="counter-number" id="openInvoices">23</div>
+  <h1>DocuWare Dashboard</h1>
+
+  <div class="card">
+    <div id="openInvoices" class="number">0</div>
+    <div class="label">Offene Rechnungen</div>
   </div>
 
-  <div class="counter-box">
-    <div class="counter-title">Offene alte Rechnungen</div>
-    <div class="counter-number" id="oldInvoices">18</div>
+  <div class="card">
+    <div id="oldInvoices" class="number">0</div>
+    <div class="label">Alte offene Rechnungen</div>
   </div>
 
-  <!-- CountUp.js via CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/countup.js@2.0.8/dist/countUp.min.js"></script>
+  <!-- CountUp.js von CDN laden -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.6.2/countUp.umd.js"></script>
+
   <script>
-    // Beispielwerte, die du per JSON oder Platzhalter einfügen kannst
-    const openInvoices ={"formula":201,"formulaLocal":201,"numberFormat":"General","text":"201","value":201,"valueType":"Double"} ;
-    const oldInvoices ={"formula":61,"formulaLocal":61,"numberFormat":"General","text":"61","value":61,"valueType":"Double"} ;
+    // Beispielhafte Daten – werden von Make ersetzt
+    const openInvoices = {{"formula":159,"formulaLocal":159,"numberFormat":"General","text":"159","value":159,"valueType":"Double"}};
 
-    // Animation starten
-    const counter1 = new CountUp('openInvoices', openInvoices);
-    const counter2 = new CountUp('oldInvoices', oldInvoices);
+    const oldInvoices = {{"formula":59,"formulaLocal":59,"numberFormat":"General","text":"59","value":59,"valueType":"Double"}};
+
+    // Werte extrahieren mit Fallback (falls "value" fehlt)
+    const openValue = openInvoices?.value ?? 0;
+    const oldValue = oldInvoices?.value ?? 0;
+
+    const counter1 = new countUp.CountUp('openInvoices', openValue);
+    const counter2 = new countUp.CountUp('oldInvoices', oldValue);
 
     if (!counter1.error) counter1.start();
     else console.error(counter1.error);
