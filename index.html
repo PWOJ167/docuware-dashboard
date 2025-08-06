@@ -28,7 +28,7 @@
     }
 
     .value {
-      font-size: 4rem;
+      font-size: 4.5rem;
       font-weight: bold;
       color: #d35400;
     }
@@ -44,7 +44,6 @@
 
     .camel-container {
       position: absolute;
-      bottom: 30px;
       width: 150px;
       text-align: center;
     }
@@ -59,15 +58,16 @@
       width: 100%;
     }
 
-    /* Geschwindigkeit: Je höher die Zahl, desto kürzer die Dauer => schneller */
     .camel-open {
-      animation: moveLeftToRight 10s linear infinite; /*  178→ schnell */
+      top: 20px;
       left: -150px;
+      animation: moveLeftToRight 178s linear infinite;
     }
 
     .camel-old {
-      animation: moveLeftToRight 20s linear infinite; /* 69→ langsamer */
+      top: 90px;
       left: -150px;
+      animation: moveLeftToRight 69s linear infinite;
     }
 
     @keyframes moveLeftToRight {
@@ -95,18 +95,18 @@
 
   <div class="desert">
     <!-- Kamel für offene Rechnungen -->
-    <div class="camel-container camel-open" style="top: 20px;">
+    <div class="camel-container camel-open">
       <div class="label">Offene Rechnungen</div>
       <div class="camel">
-        <img src="https://raw.githubusercontent.com/PWOJ167/docuware-dashboard/d2bf76493cc00e1c917616b390e095064186729e/Camel.png" alt="Kamel">
+        <img src="https://github.com/PWOJ167/docuware-dashboard/blob/main/Camel.png?raw=true"Kamel">
       </div>
     </div>
 
     <!-- Kamel für alte offene Rechnungen -->
-    <div class="camel-container camel-old" style="top: 20px;">
+    <div class="camel-container camel-old">
       <div class="label">Alte Rechnungen</div>
       <div class="camel">
-        <img src="https://raw.githubusercontent.com/PWOJ167/docuware-dashboard/d2bf76493cc00e1c917616b390e095064186729e/Camel.png" alt="Kamel">
+        <img src="https://github.com/PWOJ167/docuware-dashboard/blob/main/Camel.png?raw=true"Kamel">
       </div>
     </div>
   </div>
