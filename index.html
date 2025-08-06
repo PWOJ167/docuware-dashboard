@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard</title>
+  <title>Dashboard mit Kamelen</title>
   <style>
     body {
       margin: 0;
@@ -12,27 +12,25 @@
     }
 
     .dashboard {
-      position: absolute;
-      top: 20px;
-      width: 100%;
       text-align: center;
+      padding-top: 30px;
       color: #333;
-    }
-
-    .dashboard h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-
-    .dashboard .value {
-      font-size: 5rem;
-      font-weight: bold;
-      color: #d35400;
     }
 
     .section {
       display: inline-block;
-      margin: 40px;
+      margin: 30px;
+    }
+
+    .section h1 {
+      font-size: 2rem;
+      margin: 0;
+    }
+
+    .value {
+      font-size: 4rem;
+      font-weight: bold;
+      color: #d35400;
     }
 
     .desert {
@@ -44,26 +42,37 @@
       overflow: hidden;
     }
 
-    .camel {
+    .camel-container {
       position: absolute;
       bottom: 30px;
-      width: 120px;
-      height: auto;
-      animation: walk 30s linear infinite;
+      width: 150px;
+      text-align: center;
+    }
+
+    .label {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 5px;
     }
 
     .camel img {
       width: 100%;
-      height: auto;
     }
 
-    .camel:nth-child(2) {
-      animation-delay: 15s;
+    /* Geschwindigkeit: Je höher die Zahl, desto kürzer die Dauer => schneller */
+    .camel-open {
+      animation: moveLeftToRight 10s linear infinite; /*  175→ schnell */
+      left: -150px;
     }
 
-    @keyframes walk {
+    .camel-old {
+      animation: moveLeftToRight 20s linear infinite; /* 70→ langsamer */
+      left: -150px;
+    }
+
+    @keyframes moveLeftToRight {
       0% {
-        left: -150px;
+        left: -200px;
       }
       100% {
         left: 100%;
@@ -73,29 +82,32 @@
 </head>
 <body>
 
-
-
   <div class="dashboard">
     <div class="section">
       <h1>Offene Rechnungen</h1>
-      <div class="value">204</div>
+      <div class="value">175</div>
     </div>
     <div class="section">
-      <h1>Offene alte Rechnungen</h1>
-      <div class="value">84</div>
+      <h1>Alte offene Rechnungen</h1>
+      <div class="value">70</div>
     </div>
   </div>
- 
-     <div class="section">
-      <div class="value"></div>
-    </div>
-    
+
   <div class="desert">
-    <div class="camel">
-      <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExemNvajV6eWRydnBmZHh0M3NoOWZ0NnNjemY0b3B0NDExc2dnZjJ0eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6w1AbedvwNxolUYOoY/giphy.gif">
+    <!-- Kamel für offene Rechnungen -->
+    <div class="camel-container camel-open" style="top: 100px;">
+      <div class="label">Offene Rechnungen</div>
+      <div class="camel">
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmxkYmpzcXJybHpzamhhemt4c3Fhcnd0dGIxbm4wMTlhN21td2c2cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6w1AbedvwNxolUYOoY/giphy.gif" alt="Kamel">
+      </div>
     </div>
-    <div class="camel">
-      <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExemNvajV6eWRydnBmZHh0M3NoOWZ0NnNjemY0b3B0NDExc2dnZjJ0eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6w1AbedvwNxolUYOoY/giphy.gif">
+
+    <!-- Kamel für alte offene Rechnungen -->
+    <div class="camel-container camel-old" style="top: 100px;">
+      <div class="label">Alte Rechnungen</div>
+      <div class="camel">
+        <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYmxkYmpzcXJybHpzamhhemt4c3Fhcnd0dGIxbm4wMTlhN21td2c2cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/6w1AbedvwNxolUYOoY/giphy.gif" alt="Kamel">
+      </div>
     </div>
   </div>
 
